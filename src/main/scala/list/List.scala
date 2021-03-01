@@ -69,14 +69,14 @@ object List {
     minRec(lst, 0)
   }
 
-  //todo fix minMax
   def minMax(lst: List[Double]): (Double, Double) = {
-    def minMaxRec(lst: List[Double], mm: (Double, Double)): (Double, Double) = lst match {
+    def minMaxp(lst: List[Double], mm: (Double, Double)): (Double, Double) = lst match {
       case Nil => mm
-      case Const(head, tail) => minMaxRec(tail, (if (head < mm._1) head else mm._1, if (head > mm._2) head else mm._2))
+      case Const(head, tail) => minMaxp(tail, (if (head < mm._1) head else mm._1, if (head < mm._2) head else mm._2))
     }
-    minMaxRec(tail, (head, head))
+    minMaxp(tail(lst), (head(lst), head(lst)))
   }
+
   //add an element at the begining of the list
   def const[A](head:A, tail:List[A]): List[A] = Const(head, tail)
   //create a copy and add an element to that copy
@@ -97,12 +97,58 @@ object List {
     case (n,Const(head, tail)) => drop(n-1, tail)
   }
 
-  /*def split[A](n:Int, lst:List[A]): (List[A],List[A]) = {
-    def splitAux[A] (n:Int,lst:List[A],acum:(List[A])):(List[A], List[A])  = (n,lst) match {
-      case (0, lst) => (lst, Nil)
-      case (n, Nil) => (Nil, Nil)
-      case (n, Const(head, tail)) => split(n - 1, lst,Nil)
+  def take[A](n: Int, lst: List[A]): List[A] = (n, lst) match {
+    case (n, Nil) => Nil
+    case (1, Const(head,tail)) => addEnd(head,Nil)
+    case (n, Const(head,tail)) => Const(head,take(n-1,tail))
+  }
+
+  def init[A] (lst:List[A]): List[A] = lst match {
+    case Nil => Nil
+    case Const(head,Nil) => Nil
+    case Const(head, tail) => Const(head, init(tail))
+  }
+
+  def split[A](n: Int, lst: List[A]): (List[A], List[A]) = {
+    def splitRec[A](c: Int, lst2: List[A], acum: List[A]): (List[A], List[A]) = (c, lst2) match {
+      case (c, Nil) => (Nil, Nil)
+      case (0, Const(h, t)) => (acum, lst2)
+      case (c, Const(h, t)) => splitRec(c - 1, t, addEnd(h,acum))
     }
-  }*/
+    splitRec(n, lst, Nil)
+  }
+
+  def zip[A,B](lst1:List[A],lst2:List[B]):List[(A,B)] = (lst1,lst2) match {
+    case (lst1,Nil) => Nil
+    case (Nil,lst2) => Nil
+    case (Const(head1,tail1),Const(head2,tail2)) => Const((head1,head2),zip(tail1,tail2))
+  }
+
+  def unzip[A,B](lst: List[(A,B)]):(List[A],List[B]) = {
+    def unzipRec[A,B](lstO: List[(A,B)],lst1: List[A],lst2: List[B]): (List[A],List[B]) = lstO match {
+      case Nil => (lst1,lst2)
+      case Const(head,tail) => unzipRec(tail,addEnd(head._1,lst1),addEnd(head._2,lst2))
+    }
+    unzipRec(lst,Nil,Nil)
+  }
+
+  def reverse[A](l: List[A]): List[A] = {
+    def reverseRec[A](acum: Int, lst:List[A],lstAux:List[A]): List[A] = (acum,lst) match {
+      case (0,Nil) => lstAux
+      case (acum,Const(head,tail)) => reverseRec(acum - 1,tail, Const(head,lstAux))
+    }
+    reverseRec(length(l),l,Nil)
+  }
+
+  def intersperse[A](elem: A,lst: List[A]): List[A] = {
+    def intersperseRec[A](elem0: A,lst0: List[A],acum: List[A]):List[A] = lst0 match {
+      case Nil => acum
+      case Const(h,Nil) => addEnd(h,acum)
+      case Const(h,t) => intersperseRec(elem0,t,addEnd(elem0,addEnd(h,acum)))
+    }
+    intersperseRec(elem,lst,Nil)
+  }
+
+  //todo add concat
 
 }

@@ -16,4 +16,18 @@ object Nat {
     case n => Suc(fromIntToNatural(n - 1))
   }
 
+  def addNat (nat1:Nat, nat2:Nat): Nat = (nat1,nat2) match {
+    case (Cero,Cero) => Cero
+    case (Suc(nat1),Cero) => Suc(nat1)
+    case (Cero,Suc(nat2)) => Suc(nat2)
+    case (nat1,nat2) => fromIntToNatural(fromNatToInt(nat1)+fromNatToInt(nat2))
+  }
+  
+  def prodNat (nat1:Nat, nat2:Nat): Nat = (nat1,nat2) match {
+    case (Cero,Cero) => Cero
+    case (Suc(nat1),Cero) => Cero
+    case (Cero,Suc(nat2)) => Cero
+    case (nat1,nat2) => fromIntToNatural(fromNatToInt(nat1)*fromNatToInt(nat2))
+  }
+
 }
