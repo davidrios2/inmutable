@@ -234,6 +234,16 @@ object List {
 
   def andLeft(lst:List[Boolean]):Boolean = foldLeft(lst,true)((x,y) => x && y)
 
+  //pensar en lo que la "b" puede significar no necesaariamente algo específico
+  def takeWhileLeft[A](lst:List[A])(p:A=> Boolean):List[A] = {
+    def f (b:(Boolean,List[A]),a:A):(Boolean,List[A]) =
+      b match {
+        case (true,lst) => if (p(a)) (true, addEnd (lst, a)) else (false,lst)
+        case (false, lst) => b
+      }
+    foldLeft(lst,(true,Nil:List[A]))(f)._2
+  }
+
   def sumarUno(lst:List[Int]):List[Int] = lst match {
     case Nil => Nil
     case Const(head,tail) => Const(head + 1, sumarUno(tail))
@@ -255,6 +265,7 @@ object List {
 
   // todo def lstIntToStringMap (lst:List[Int]): List[String] = mapGen(lst)(_.toString)
 
+  //dropWhileRight --> ¿qué tendría que pasarle para acumular en la lista
 
 
 }
