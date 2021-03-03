@@ -1,0 +1,4 @@
+[debug] [inmutable-build] Classpath dependencies List()
+[debug] [inmutable-build] Dependencies from configurations List()
+[debug] Bloop wrote the configuration of project 'inmutable-build' to '/home/david/Desktop/Scala/inmutable/project/.bloop/inmutable-build.json'
+[success] Generated .bloop/inmutable-build.json

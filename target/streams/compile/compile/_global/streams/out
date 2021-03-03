@@ -1,6 +1,14 @@
-[0m[[0m[31merror[0m] [0m[0m/home/david/Desktop/Scala/inmutable/src/main/scala/list/List.scala:12:19: type mismatch;[0m
-[0m[[0m[31merror[0m] [0m[0m found   : A[0m
-[0m[[0m[31merror[0m] [0m[0m required: Nothing[0m
-[0m[[0m[31merror[0m] [0m[0m    else Const(as.head, apply(as.tail: _*))[0m
-[0m[[0m[31merror[0m] [0m[0m                  ^[0m
-[0m[[0m[31merror[0m] [0m[0mone error found[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/david/Desktop/Scala/inmutable/src/main/scala/co/s4n/inmutable/list/List.scala:42:34: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: Nil[0m
+[0m[[0m[33mwarn[0m] [0m[0m  def head[A](lst: List[A]): A = lst match {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                 ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/david/Desktop/Scala/inmutable/src/main/scala/co/s4n/inmutable/list/List.scala:151:76: match may not be exhaustive.[0m
+[0m[[0m[33mwarn[0m] [0m[0mIt would fail on the following input: (_, Nil)[0m
+[0m[[0m[33mwarn[0m] [0m[0m    def reverseRec[A](acum: Int, lst: List[A], lstAux: List[A]): List[A] = (acum, lst) match {[0m
+[0m[[0m[33mwarn[0m] [0m[0m                                                                           ^[0m
+[0m[[0m[33mwarn[0m] [0m[0m/home/david/Desktop/Scala/inmutable/src/main/scala/co/s4n/inmutable/tree/Tree.scala:7:8: Tree has a valid main method (args: Array[String]): Unit,[0m
+[0m[[0m[33mwarn[0m] [0m[0m  but co.s4n.inmutable.tree.Tree will not have an entry point on the JVM.[0m
+[0m[[0m[33mwarn[0m] [0m[0m  Reason: companion is a trait, which means no static forwarder can be generated.[0m
+[0m[[0m[33mwarn[0m] [0m[0mobject Tree extends App {[0m
+[0m[[0m[33mwarn[0m] [0m[0m       ^[0m
+[0m[[0m[33mwarn[0m] [0m[0mthree warnings found[0m
